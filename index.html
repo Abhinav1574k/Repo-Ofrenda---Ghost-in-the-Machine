@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#201b18">
+  <title>Repo Ofrenda — a living memory of your code</title>
+  <style>
+    :root{color-scheme:dark;--night:#201b18;--panel:#2a2420;--paper:#f4ead8;--muted:#b9aa96;--gold:#e7b85d;--orange:#ef875d;--marigold:#ffc95e;--line:#54483d;--green:#a9bc91}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 78% 2%,#573629 0,transparent 34rem),var(--night);color:var(--paper);font:16px/1.55 Georgia,"Times New Roman",serif;min-height:100vh}
+    .wrap{max-width:1120px;margin:auto;padding:36px 24px 64px}.top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:64px;font:13px/1.4 system-ui,sans-serif;color:var(--muted)}.brand{color:var(--paper);font-weight:700;letter-spacing:.1em;text-transform:uppercase}.private{border:1px solid var(--line);border-radius:999px;padding:8px 13px}
+    .hero{max-width:760px;margin:0 0 58px}.kicker{color:var(--marigold);font:700 12px/1.4 system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase}.hero h1{font-size:clamp(44px,8vw,82px);line-height:.98;letter-spacing:-.055em;margin:18px 0}.hero p{color:#d5c6b1;font-size:20px;max-width:650px;margin:0}.project-line{display:flex;align-items:center;gap:12px;margin-top:26px;font:14px system-ui,sans-serif;color:var(--muted)}.flame{color:var(--orange);font-size:23px}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,390px);gap:28px;align-items:start}.section-title{font:700 12px system-ui,sans-serif;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin:0 0 18px}.chapters{position:relative}.chapters:before{content:"";position:absolute;left:11px;top:14px;bottom:16px;width:1px;background:linear-gradient(var(--gold),var(--line));opacity:.65}.chapter{position:relative;padding:0 0 22px 38px}.chapter:before{content:"✺";position:absolute;left:0;top:0;color:var(--marigold);font-size:22px;line-height:24px}.chapter button{width:100%;display:grid;grid-template-columns:1fr auto;gap:6px 16px;text-align:left;padding:15px 17px;background:var(--panel);border:1px solid transparent;border-radius:14px;color:var(--paper);cursor:pointer;font:inherit;transition:.18s ease}.chapter button:hover,.chapter button[aria-current=true]{border-color:#9c7443;background:#332b24;transform:translateY(-1px)}.month{font-size:21px}.count{font:12px system-ui,sans-serif;color:var(--gold);align-self:center}.preview{grid-column:1/-1;color:var(--muted);font:13px/1.45 system-ui,sans-serif;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .story{position:sticky;top:24px;background:linear-gradient(145deg,#342a23,#27211d);border:1px solid #62503d;border-radius:20px;padding:25px;box-shadow:0 24px 70px #09070655}.story-head{display:flex;justify-content:space-between;gap:12px;align-items:start}.story h2{font-size:28px;line-height:1.08;margin:0}.seal{font-size:25px;color:var(--marigold)}.story-copy{font-size:18px;color:#e0d2bd;min-height:156px;margin:22px 0}.note{font:12px/1.5 system-ui,sans-serif;color:var(--gold);min-height:18px}.source-title{font:700 11px system-ui,sans-serif;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;border-top:1px solid var(--line);padding-top:17px;margin-top:8px}.sources{list-style:none;margin:10px 0 0;padding:0;max-height:230px;overflow:auto}.sources li{font:12px/1.5 system-ui,sans-serif;color:var(--muted);padding:7px 0;border-bottom:1px solid #ffffff12}.sources code{color:var(--green);margin-right:7px}.foot{margin-top:58px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font:12px/1.5 system-ui,sans-serif;display:flex;justify-content:space-between;gap:12px}.loading{color:var(--muted)}
+    @media(max-width:760px){.wrap{padding:22px 16px 48px}.top{margin-bottom:48px}.layout{grid-template-columns:1fr}.story{position:static;grid-row:1}.story-copy{min-height:0}.hero p{font-size:18px}.foot{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="top"><span class="brand">✺ Repo Ofrenda</span><span class="private">◉ This repository stays on your machine</span></nav>
+    <section class="hero">
+      <div class="kicker">A little remembrance for the work we leave behind</div>
+      <h1>Every project<br>has a past.</h1>
+      <p>Walk through the moments that shaped this repository. Each chapter is drawn from its own Git record; the local model can help tell the story, with sources close at hand.</p>
+      <div class="project-line"><span class="flame">🕯</span><span id="project">Loading repository…</span><span>·</span><span id="total"></span></div>
+    </section>
+    <div class="layout">
+      <section><h2 class="section-title">Chapters in the record</h2><div id="chapters" class="chapters"><p class="loading">Gathering the project’s history…</p></div></section>
+      <aside class="story" aria-live="polite">
+        <div class="story-head"><div><div class="kicker">The model's remembrance</div><h2 id="story-title" style="margin-top:8px">Choose a chapter</h2></div><span class="seal">✺</span></div>
+        <p id="story" class="story-copy">Select a month to remember the work recorded there.</p>
+        <p id="note" class="note">A local model offers an interpretation; citations are pointers, not proof.</p>
+        <div class="source-title">From the Git record</div><ul id="sources" class="sources"><li>Source commits will appear here.</li></ul>
+      </aside>
+    </div>
+    <footer class="foot"><span>Repo Ofrenda · local-first, open-weight, human-readable</span><span>No code contents or commit records are sent to a hosted service.</span></footer>
+  </main>
+  <script>
+    const monthName = value => new Date(value + "-02T00:00:00").toLocaleDateString(undefined,{month:"long",year:"numeric"});
+    const esc = value => String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    async function openChapter(month, button){
+      document.querySelectorAll(".chapter button").forEach(el=>el.removeAttribute("aria-current"));
+      if(button) button.setAttribute("aria-current","true");
+      document.querySelector("#story-title").textContent=monthName(month);
+      document.querySelector("#story").textContent="Listening to this chapter…";
+      document.querySelector("#note").textContent="";
+      document.querySelector("#sources").innerHTML="";
+      const data=await fetch("/api/story?month="+encodeURIComponent(month)).then(r=>r.json());
+      document.querySelector("#story").textContent=data.story;
+      document.querySelector("#note").textContent=data.note||"Local model interpretation · citations are pointers, not proof.";
+      document.querySelector("#sources").innerHTML=data.sources.length?data.sources.map(c=>`<li><code>${esc(c.sha)}</code>${esc(c.day)} · ${esc(c.subject)}</li>`).join(""):"<li>No commits recorded.</li>";
+    }
+    fetch("/api/data").then(r=>r.json()).then(data=>{
+      if(data.error) throw new Error(data.error);
+      const count=data.months.reduce((n,m)=>n+m.count,0);
+      document.querySelector("#project").textContent=data.project;
+      document.querySelector("#total").textContent=count+" recorded commits";
+      const host=document.querySelector("#chapters");host.innerHTML="";
+      if(!data.months.length){host.innerHTML="<p class=loading>No Git chapters found yet.</p>";return;}
+      for(const m of data.months){
+        const first=m.commits[0], last=m.commits[m.commits.length-1];
+        const node=document.createElement("div");node.className="chapter";
+        node.innerHTML=`<button type="button"><span class="month">${esc(monthName(m.month))}</span><span class="count">${m.count} ${m.count===1?"entry":"entries"}</span><span class="preview">${esc(first.subject)}${first.sha!==last.sha?" · … · "+esc(last.subject):""}</span></button>`;
+        const button=node.querySelector("button");button.addEventListener("click",()=>openChapter(m.month,button));host.append(node);
+      }
+      const first=host.querySelector("button");if(first)first.click();
+    }).catch(error=>{document.querySelector("#chapters").innerHTML=`<p class=loading>${esc(error.message)}</p>`;});
+  </script>
+</body>
+</html>
